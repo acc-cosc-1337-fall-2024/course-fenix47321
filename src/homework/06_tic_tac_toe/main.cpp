@@ -9,15 +9,21 @@ int main()
 {
 	TicTacToe game;
 	
-	string first_player = game.get_player();
-	game.start_game(first_player);
-
+	
 	int position;
-	do {
-		cout << "enter position 1-9";
-		cin >> position;
-		game.mark_board(position);
-		game.display_board();
-	} while (position != 10);
+	string asker;
+	while (asker != "n"){
+
+		string first_player = game.get_player();
+		game.start_game(first_player);
+
+		while (!game.game_over()){
+			cout << "enter position 1-9";
+			cin >> position;
+			game.mark_board(position);
+		}
+	cout << "Do you want to play the game again? y/n\n";
+	cin >> asker;
+	}
 	return 0;
 }
