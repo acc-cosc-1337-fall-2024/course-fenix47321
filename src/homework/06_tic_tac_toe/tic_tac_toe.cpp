@@ -13,11 +13,28 @@ using std::cin;
 
 bool game_over();
 
-void start_game(string first_player);
+void TicTacToe::start_game(string first_player){
+    player = first_player;
+    display_board();
+}
 
-void mark_board(int position);
+void TicTacToe::mark_board(int position){
+    if (position < 1 || position > 9) {
+        cout << "Invalid position, only between 1 and 9!";
+        return;
+    }
+    
+    if (pegs[position-1] != " ") {
+        cout << "Position already taken";
+        return;
+    }
 
-string const get_player(){
+    pegs[position-1] = player;
+    set_next_player();
+
+}
+
+string const TicTacToe::get_player(){
     // CONST
     string first_player;
     cout << "Please select fist player. First player is X or O. Second player auto O.\n";
@@ -32,7 +49,14 @@ void const TicTacToe::display_board(){
     }
 }
 
-void set_next_player();
+void TicTacToe::set_next_player(){
+    if (player == "x") {
+        player = "o";
+    }
+    else {
+        player = "x";
+    }
+}
 
 bool check_board_full();
 
