@@ -17,6 +17,7 @@ bool TicTacToe::game_over(){
         if(pegs[i] != " " &&
         pegs[i] == pegs[i+1]&&
         pegs[i] == pegs[i+2]){
+        set_next_player();
         cout << player << " Wins!\n";        
         return true;}
     }
@@ -25,6 +26,7 @@ bool TicTacToe::game_over(){
         if(pegs[i] != " " &&
         pegs[i] == pegs[i+3]&&
         pegs[i] == pegs[i+6]){
+        set_next_player();
         cout << player << " Wins!\n";
         return true;}
     }
@@ -32,12 +34,14 @@ bool TicTacToe::game_over(){
     if(pegs[0] != " " &&
         pegs[0] == pegs[4]&&
         pegs[4] == pegs[8]){
+        set_next_player();
         cout << player << " Wins!\n";
         return true;}
 
     if(pegs[2] != " " &&
         pegs[2] == pegs[4]&&
         pegs[4] == pegs[6]){
+        set_next_player();
         cout << player << " Wins!\n";
         return true;}
 
