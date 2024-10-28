@@ -14,6 +14,7 @@ public:
     void mark_board(int position);
     string const get_player();
     void const display_board();
+    string const get_current_player() const { return player; }
 
 private:
     vector<string> pegs{9, " "};

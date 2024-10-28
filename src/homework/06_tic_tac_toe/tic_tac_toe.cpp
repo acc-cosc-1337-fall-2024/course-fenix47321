@@ -12,12 +12,12 @@ using std::cin;
 
 
 bool TicTacToe::game_over(){
-
+    
     for (int i = 0; i < 9; i += 3){
         if(pegs[i] != " " &&
         pegs[i] == pegs[i+1]&&
         pegs[i] == pegs[i+2]){
-        set_next_player();
+        player = "None";
         cout << player << " Wins!\n";        
         return true;}
     }
@@ -26,7 +26,7 @@ bool TicTacToe::game_over(){
         if(pegs[i] != " " &&
         pegs[i] == pegs[i+3]&&
         pegs[i] == pegs[i+6]){
-        set_next_player();
+        player = "None";
         cout << player << " Wins!\n";
         return true;}
     }
@@ -34,18 +34,24 @@ bool TicTacToe::game_over(){
     if(pegs[0] != " " &&
         pegs[0] == pegs[4]&&
         pegs[4] == pegs[8]){
-        set_next_player();
+        player = "None";
         cout << player << " Wins!\n";
         return true;}
 
     if(pegs[2] != " " &&
         pegs[2] == pegs[4]&&
         pegs[4] == pegs[6]){
-        set_next_player();
+        player = "None";
         cout << player << " Wins!\n";
         return true;}
+    
+    if(check_board_full()) {
+       cout << "Draw!\n";
+       player = "None";
+       return true;
+   }
 
-    return check_board_full();
+    return false;
 }
 
 void TicTacToe::start_game(string first_player){
@@ -67,13 +73,15 @@ void TicTacToe::mark_board(int position){
 
     pegs[position-1] = player;
     display_board();
-    set_next_player();
+    if(!game_over()){
+        set_next_player();
+    }
 
 }
 
 string const TicTacToe::get_player(){
     // CONST
-    string first_player;
+    string first_player = "None";
     cout << "Please select fist player. First player is x or o. Second player auto O.\n";
     cin >> first_player;
     return first_player;
@@ -87,6 +95,7 @@ void const TicTacToe::display_board(){
 }
 
 void TicTacToe::set_next_player(){
+    
     if (player == "x") {
         player = "o";
     }
