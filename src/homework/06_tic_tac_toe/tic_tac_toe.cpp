@@ -13,42 +13,62 @@ using std::cin;
 
 bool TicTacToe::game_over(){
     
-    for (int i = 0; i < 9; i += 3){
-        if(pegs[i] != " " &&
-        pegs[i] == pegs[i+1]&&
-        pegs[i] == pegs[i+2]){
-        player = "None";
-        cout << player << " Wins!\n";        
-        return true;}
-    }
+//     for (int i = 0; i < 9; i += 3){
+//         if(pegs[i] != " " &&
+//         pegs[i] == pegs[i+1]&&
+//         pegs[i] == pegs[i+2]){
+//         player = "None";
+//         cout << player << " Wins!\n";        
+//         return true;}
+//     }
         
-    for (int i = 0; i < 3; i ++){
-        if(pegs[i] != " " &&
-        pegs[i] == pegs[i+3]&&
-        pegs[i] == pegs[i+6]){
-        player = "None";
-        cout << player << " Wins!\n";
-        return true;}
-    }
+//     for (int i = 0; i < 3; i ++){
+//         if(pegs[i] != " " &&
+//         pegs[i] == pegs[i+3]&&
+//         pegs[i] == pegs[i+6]){
+//         player = "None";
+//         cout << player << " Wins!\n";
+//         return true;}
+//     }
 
-    if(pegs[0] != " " &&
-        pegs[0] == pegs[4]&&
-        pegs[4] == pegs[8]){
-        player = "None";
-        cout << player << " Wins!\n";
-        return true;}
+//     if(pegs[0] != " " &&
+//         pegs[0] == pegs[4]&&
+//         pegs[4] == pegs[8]){
+//         player = "None";
+//         cout << player << " Wins!\n";
+//         return true;}
 
-    if(pegs[2] != " " &&
-        pegs[2] == pegs[4]&&
-        pegs[4] == pegs[6]){
-        player = "None";
-        cout << player << " Wins!\n";
-        return true;}
+//     if(pegs[2] != " " &&
+//         pegs[2] == pegs[4]&&
+//         pegs[4] == pegs[6]){
+//         player = "None";
+//         cout << player << " Wins!\n";
+//         return true;}
     
+//     if(check_board_full()) {
+//        cout << "Draw!\n";
+//        player = "None";
+//        return true;
+//    }
+
+    if(check_row_win()) {
+        set_winner();
+        return true;
+    }
+    
+    if(check_column_win()) {
+        set_winner(); 
+        return true;
+    }
+    
+    if(check_diagonal_win()) {
+        set_winner();
+        return true;
+    }
+   
     if(check_board_full()) {
-       cout << "Draw!\n";
-       player = "None";
-       return true;
+        player = "C";
+        return true;
    }
 
     return false;
@@ -114,6 +134,51 @@ bool TicTacToe::check_board_full(){
     return true;
 }
 
+bool TicTacToe::check_column_win(){
+    for (int i = 0; i < 3; i++) {
+        if(pegs[i] != " " && 
+           pegs[i] == pegs[i+3] && 
+           pegs[i] == pegs[i+6]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool TicTacToe::check_diagonal_win(){
+    if(pegs[0] != " " && 
+       pegs[0] == pegs[4] && 
+       pegs[4] == pegs[8]) {
+        return true;
+    }
+    
+    if(pegs[2] != " " && 
+       pegs[2] == pegs[4] && 
+       pegs[4] == pegs[6]) {
+        return true;
+    }
+    return false;
+}
+
+bool TicTacToe::check_row_win(){
+    for (int i = 0; i < 9; i += 3) {
+        if(pegs[i] != " " && 
+           pegs[i] == pegs[i+1] && 
+           pegs[i] == pegs[i+2]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void TicTacToe::set_winner(){
+    if(player == "X") {
+        player = "O";
+    }
+    else {
+        player = "X"; 
+    }
+}
 
 void TicTacToe::clear_board(){
     for(int i = 0; i < 9; i++) {

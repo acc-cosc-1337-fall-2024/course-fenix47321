@@ -15,14 +15,21 @@ public:
     string const get_player();
     void const display_board();
     string const get_current_player() const { return player; }
+    
 
 private:
     vector<string> pegs{9, " "};
     string player;
+    string winner;
     
     void set_next_player();
     bool check_board_full();
     void clear_board();
+    bool check_column_win();
+    bool check_diagonal_win();
+    bool check_row_win();
+    void set_winner();
+
 };
 
 #endif
